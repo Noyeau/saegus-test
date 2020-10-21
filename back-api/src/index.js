@@ -14,43 +14,39 @@ const swaggerOptions = require('./swagger/swagger.js')(path.dirname(require.main
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerSpecs = swaggerJsdoc(swaggerOptions);
 
+const preprocessService = require('./services/preprocess')
 
-
-const sequelize =  require('./orm')
-
-
-
-
-//Initialisation de la BDD
-sequelize.authenticate().then(() => {
-  console.log('Connection established successfully.');
-  let task = require('./entities/task')
-  let user = require('./entities/user')
-
-  task.sync({force: true}).then(function () {
-    console.log("Task Sync BDD")
-   });
-  user.sync({force: true}).then(function () {
-    console.log("User Sync BDD")
-   });
-})
+const ORM = require('./orm')
 
 
 
-app.get('/swagger.json', (req, res) => {
+ORM.init().then(()=>{
+console.log("OKKKKKKKKKKKKKKKKKKKKK")
+  app.get('/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpecs)
-})
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
-
-app.use(cors(corsOptions))
-app.use(bodyParser())
-app.use(routes)
-
-
-
-
-
-http.listen(3000, function () {
+  })
+  
+  
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+  
+  //Vérification de la Token si présente
+  app.use(preprocessService.checkJwt)
+  
+  app.use(cors(corsOptions))
+  app.use(bodyParser())
+  app.use(routes)
+  
+  
+  
+  
+  
+  http.listen(3000, function () {
     console.log('Example app listening on port 3000!')
+  })
+},err=>{
+  throw "erreur connexion BDD"
 })
+
+
+
