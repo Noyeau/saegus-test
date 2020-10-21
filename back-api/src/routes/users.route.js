@@ -30,7 +30,6 @@ router.get('/', async (req, res) => {
         res.status(401).send({ msg: "Merci de vous authentifier"})
         return 
     }
-    console.log('JWTTT', req.jwt)
     let user = await userService.getById(req.jwt.id)
     if (user) {
         res.status(200).send(user)

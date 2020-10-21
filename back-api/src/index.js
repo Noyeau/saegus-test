@@ -21,7 +21,6 @@ const ORM = require('./orm')
 
 
 ORM.init().then(()=>{
-console.log("OKKKKKKKKKKKKKKKKKKKKK")
   app.get('/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpecs)

@@ -27,8 +27,6 @@ const authService = require("../services/auth");
  *
  */
 router.post('/login', async (req, res) => {
-    console.log('reqqq', req.body)
-
     let user = req.body
     if (!user || !user.password || !user.email) {
         res.status(400).send({ msg: 'données manquantes' })

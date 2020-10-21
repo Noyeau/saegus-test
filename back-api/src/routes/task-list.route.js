@@ -32,7 +32,6 @@ router.get('/', async (req, res) => {
         res.status(401).send({ msg: "Merci de vous authentifier"})
         return 
     }
-    console.log(req.jwt)
     let tasklList = await TaskList.findAll({where:{userId:req.jwt.id}})
   
     res.status(200).send(tasklList)
@@ -51,7 +50,6 @@ router.post('/', async (req, res) => {
         return 
     }
 
-    console.log(req.param)
     let list = {...req.body, userId: req.jwt.id}
     let tasklList = await TaskList.create(list)
   
