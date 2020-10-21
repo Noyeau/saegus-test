@@ -3,6 +3,8 @@ const userService = require("../services/user");
 
 const TaskList = require('../entities/taskList')
 
+const Task = require('../entities/task')
+
 /**
  * @swagger
  * /lists:
@@ -57,7 +59,25 @@ router.post('/', async (req, res) => {
 })
 
 
-
+//get One List
+router.get('/:id', async (req, res) => {
+      if(!req.jwt){
+          res.status(401).send({ msg: "Merci de vous authentifier"})
+          return 
+      }
+  
+      if(isNaN(req.params.id)){
+          res.status(404).send({ msg: "Donnée manquantes"})
+          return 
+      }
+  
+      let list = await TaskList.findOne({where:{id:req.params.id, userId:req.jwt.id}})
+      if(list){
+          res.status(200).send(list)
+          return
+      }
+      res.status(403).send({ msg: "Liste non trouvé"})
+  })
 
 
 //Update List
@@ -99,7 +119,7 @@ router.delete('/:id', async (req, res) => {
     if(list){
         let tmp = await list.destroy()
         if(tmp){
-            res.status(200).send(tmp)
+            res.status(200).send({msg:"Element supprimé"})
             return
         }
         res.status(404).send({msg:"Error suppression"})
@@ -108,5 +128,8 @@ router.delete('/:id', async (req, res) => {
     }
     res.status(403).send({ msg: "Liste non trouvé"})
 })
+
+
+
 
 module.exports = router;

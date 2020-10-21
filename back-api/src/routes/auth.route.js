@@ -67,7 +67,6 @@ router.post('/login', async (req, res) => {
  *
  */
 router.post('/signin', async (req, res) => {
-    console.log('reqqq', req.body)
     let userTmp = req.body
     if (!userTmp) {
         res.status(400).send({ msg: 'données manquantes' })

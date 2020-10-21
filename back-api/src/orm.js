@@ -16,6 +16,8 @@ function init() {
 
             User.hasMany(TaskList, { as: "taskLists" });
             TaskList.hasMany(Task, { as: "task" });
+            Task.belongsTo(TaskList)
+            TaskList.belongsTo(User)
 
 
             resolve(true)
