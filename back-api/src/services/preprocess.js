@@ -10,6 +10,7 @@ function checkJwt(req, res, next) {
     let tokenDecripted = authService.verifyJwt(token)
     if (tokenDecripted && tokenDecripted.data) {
         req.jwt = tokenDecripted.data
+        console.log("user",req.jwt)
     }
     return next()
 }

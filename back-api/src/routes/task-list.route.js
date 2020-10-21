@@ -28,7 +28,6 @@ const TaskList = require('../entities/taskList')
  *
  */
 router.get('/', async (req, res) => {
-    console.log('JWTTT', req.jwt)
     if(!req.jwt){
         res.status(401).send({ msg: "Merci de vous authentifier"})
         return 
@@ -42,7 +41,6 @@ router.get('/', async (req, res) => {
 
 //New List
 router.post('/', async (req, res) => {
-    console.log('JWTTT', req.jwt)
     if(!req.jwt){
         res.status(401).send({ msg: "Merci de vous authentifier"})
         return 
@@ -66,7 +64,6 @@ router.post('/', async (req, res) => {
 
 //Update List
 router.post('/:id', async (req, res) => {
-    console.log('PARAMS', req.params, req.jwt)
     if(!req.jwt){
         res.status(401).send({ msg: "Merci de vous authentifier"})
         return 
@@ -78,7 +75,6 @@ router.post('/:id', async (req, res) => {
     }
 
     let list = await TaskList.findOne({where:{id:req.params.id, userId:req.jwt.id}})
-    console.log("list", list)
     if(list){
         Object.assign(list, req.body)
         let tmp = await list.save()
@@ -91,7 +87,6 @@ router.post('/:id', async (req, res) => {
 
 //Delete List
 router.delete('/:id', async (req, res) => {
-    console.log('PARAMS', req.params, req.jwt)
     if(!req.jwt){
         res.status(401).send({ msg: "Merci de vous authentifier"})
         return 
