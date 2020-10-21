@@ -2,7 +2,9 @@
 const router = require("express").Router();
 
 
-router.get('/', (req, res) => res.end("Hello World!"))
+router.get('/', (req, res) =>{
+    res.end("Hello World!")
+})
 
 
 module.exports = router;

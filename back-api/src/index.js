@@ -14,6 +14,29 @@ const swaggerOptions = require('./swagger/swagger.js')(path.dirname(require.main
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerSpecs = swaggerJsdoc(swaggerOptions);
 
+
+
+const sequelize =  require('./orm')
+
+
+
+
+//Initialisation de la BDD
+sequelize.authenticate().then(() => {
+  console.log('Connection established successfully.');
+  let task = require('./entities/task')
+  let user = require('./entities/user')
+
+  task.sync({force: true}).then(function () {
+    console.log("Task Sync BDD")
+   });
+  user.sync({force: true}).then(function () {
+    console.log("User Sync BDD")
+   });
+})
+
+
+
 app.get('/swagger.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpecs)
