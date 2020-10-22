@@ -5,9 +5,10 @@ const TaskList = require('./taskList');
 
 
 var Task = sequelize.define('task', {
-    shortDescription: Sequelize.STRING,
+    shortDescription: { type: Sequelize.STRING, allowNull: false},
     longDescription: Sequelize.STRING,
-    echeanceDate: Sequelize.DATE,
+    echeanceDate: { type: Sequelize.DATE, allowNull: false},
+    finish: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
 }, {
     freezeTableName: true // Model tableName will be the same as the model name
 });

@@ -40,10 +40,12 @@ function logIn(userForm) {
                 id: user.get('id'),
                 email: user.get('email')
             }
+            let userTmp = user.get() 
+            delete userTmp.password
 
-            resolve({jwtToken : createJwt(jwtData)})
+            resolve({jwtToken : createJwt(jwtData), user:userTmp})
         }, err => {
-            return reject('aucun compte/password correspondant')
+            reject('aucun compte/password correspondant')
         })
 
     })
