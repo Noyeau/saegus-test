@@ -3,21 +3,22 @@
 
 
 
-<mat-list>
+
   <div mat-subheader ><span [matBadge]="tasksNoFinish().length"  matBadgeOverlap="false">Mes tâches à réaliser</span></div>
-  <mat-list-item *ngFor="let task of tasksNoFinish()" (click)="selectTask(task)">
+  <mat-selection-list  multiple="false">
+  <mat-list-option *ngFor="let task of tasksNoFinish()" (click)="selectTask(task)"  [value]="task">
     <mat-icon mat-list-icon>collections_bookmark</mat-icon>
     <div mat-line>
       {{task.shortDescription}}
     </div>
     <div mat-line>{{task.echeanceDate|date}}</div>
-    <button mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="accent">
+    <button class="flag" mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="accent">
       <mat-icon>outlined_flag</mat-icon>
     </button>
-  </mat-list-item>
+  </mat-list-option>
   <mat-divider></mat-divider>
 
-</mat-list>
+</mat-selection-list>
 
 <mat-list>
   <div style="cursor: pointer;" mat-subheader (click)="displayFinished=!displayFinished">
@@ -26,19 +27,20 @@
       terminées
     </span>
 </div>
-
+<mat-selection-list multiple="false">
   <ng-container *ngIf="displayFinished">
-    <mat-list-item *ngFor="let task of tasksFinish()" (click)="selectTask(task)">
+    <mat-list-option *ngFor="let task of tasksFinish()" (click)="selectTask(task)" [value]="task">
       <mat-icon mat-list-icon>folder</mat-icon>
       <div mat-line>
         {{task.shortDescription}}
       </div>
       <div mat-line>{{task.echeanceDate|date}}</div>
-      <button mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="primary">
+      <button class="flag" mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="primary">
         <mat-icon>flag</mat-icon>
       </button>
-    </mat-list-item>
+    </mat-list-option>
   </ng-container>
+</mat-selection-list>
   <mat-divider></mat-divider>
 
 </mat-list>
