@@ -1,3 +1,21 @@
-<pre>
-  {{task|json}}
-  </pre>
+ <h2>Détails :</h2>
+
+<mat-card class="example-card" color="dark">
+  <mat-card-header>
+    <mat-card-title>{{task.shortDescription}}</mat-card-title>
+    <mat-card-subtitle>Créé le : {{task.createdAt|date}}</mat-card-subtitle>
+    <button mat-icon-button aria-label="termine" (click)="toggleFlag()" [color]="task.finish ? 'primary':'accent'">
+      <mat-icon>{{task.finish ? "flag":"outlined_flag"}}</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{task.echeanceDate|date}}</p>
+    <p>
+      {{task.longDescription}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="editTask()">Editer</button>
+    <button mat-button (click)="deleteTask()">Supprimer</button>
+  </mat-card-actions>
+</mat-card>

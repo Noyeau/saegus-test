@@ -1,0 +1,31 @@
+<div [formGroup]="form" class="flex-container">
+  <mat-form-field>
+    <mat-label>short description</mat-label>
+    <input matInput class="form-control" placeholder="Just a placeholder" formControlName="shortDescription">
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>long description</mat-label>
+    <textarea matInput  placeholder="Just a placeholder" formControlName="longDescription"></textarea>
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-label>echeance date</mat-label>
+    <input matInput [matDatepicker]="picker"  formControlName="echeanceDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+
+
+</div>
+
+
+<!-- public form = new FormGroup({
+  id: new FormControl(null),
+  shortDescription: new FormControl(null, [Validators.required]),
+  longDescription: new FormControl(null),
+  echeanceDate: new FormControl(null, [Validators.required]),
+  finish: new FormControl(false),
+}) -->

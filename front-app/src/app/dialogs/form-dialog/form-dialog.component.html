@@ -1,0 +1,18 @@
+<h1 mat-dialog-title *ngIf="data.title">{{data?.title}}</h1>
+
+<div mat-dialog-content>
+
+  <ng-container *ngIf="data.type == 'list'">
+    <app-edit-list  [data]="data.data" (formGroupChange)="formGroupChange($event)"></app-edit-list>
+  </ng-container>
+
+  <ng-container *ngIf="data.type == 'task'">
+    <app-edit-task  [data]="data.data" (formGroupChange)="formGroupChange($event)"></app-edit-task>
+  </ng-container>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close="false">No Thanks</button>
+  <button mat-button [mat-dialog-close]="form?.value" [disabled]="!formOk()" cdkFocusInitial>Ok</button>
+</div>

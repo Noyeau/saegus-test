@@ -1,3 +1,4 @@
+<button mat-raised-button (click)="newList()">Nouvelle Liste</button>
 <mat-list>
   <div mat-subheader>Mes lites</div>
   <mat-list-item *ngFor="let list of taskLists" (click)="selectList(list)">
