@@ -1,0 +1,26 @@
+<ng-container *ngIf="!connected; else logout" [formGroup]="loginForm">
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input placeholder="aaa@test.com" matInput type="text" formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input placeholder="djs5SDF£%sq" matInput type="password" formControlName="password">
+  </mat-form-field>
+
+  <button mat-button (click)="logIn()">
+    login
+  </button>
+
+
+</ng-container>
+
+<ng-template #logout>
+
+  <button mat-button (click)="logOut()">
+    logOut
+  </button>
+
+</ng-template>

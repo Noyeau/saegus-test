@@ -1,0 +1,9 @@
+<mat-list>
+  <div mat-subheader>Mes Taches</div>
+  <mat-list-item *ngFor="let task of tasks" (click)="selectTask(task)">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>{{task|json}}</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  
+</mat-list>

@@ -9,21 +9,37 @@ import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
 import { MaterialModule } from './material.module';
 import { MenuSidebarComponent } from './components/menu-sidebar/menu-sidebar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './http-interceptors';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { NoConnectedComponent } from './pages/no-connected/no-connected.component';
+import { TaskListsComponent } from './components/task-lists/task-lists.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TaskComponent } from './components/task/task.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MenuSidebarComponent
+    MenuSidebarComponent,
+    LoginComponent,
+    HomeComponent,
+    NoConnectedComponent,
+    TaskListsComponent,
+    TasksComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    MaterialModule
+    MaterialModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
