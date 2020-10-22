@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="drawer.toggle()" aria-label="menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Saegus Taches Test</span>
+ 
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+
+    <ng-content select="[menu]">
+    </ng-content>
+
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+
+  </div>
+
+  <ng-content select="[page]">
+  </ng-content>
+</mat-drawer-container>
