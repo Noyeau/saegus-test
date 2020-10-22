@@ -222,7 +222,7 @@ router.delete('/:id', async (req, res) => {
         return 
     }
 
-    if(isNaN(req.params.id) || !req.body || !req.body.title){
+    if(isNaN(req.params.id)){
         res.status(404).send({ msg: "Donnée manquantes"})
         return 
     }
