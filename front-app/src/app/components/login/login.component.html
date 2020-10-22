@@ -1,26 +1,25 @@
-<ng-container *ngIf="!connected; else logout" [formGroup]="loginForm">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Connection</mat-card-title>
+    </mat-card-header>
+    <mat-card-content [formGroup]="loginForm">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input placeholder="aaa@test.com" matInput type="text" formControlName="email">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input placeholder="djs5SDF£%sq" matInput type="password" formControlName="password">
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button routerLink="inscription">Créer un compte</button>
+      <button mat-button [disabled]="!loginForm.valid" (click)="logIn()">
+        Se connecter
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input placeholder="aaa@test.com" matInput type="text" formControlName="email">
-  </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input placeholder="djs5SDF£%sq" matInput type="password" formControlName="password">
-  </mat-form-field>
-
-  <button mat-button (click)="logIn()">
-    login
-  </button>
-
-
-</ng-container>
-
-<ng-template #logout>
-
-  <button mat-button (click)="logOut()">
-    logOut
-  </button>
-
-</ng-template>

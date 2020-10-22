@@ -1,0 +1,19 @@
+<!-- <mat-card>
+  <mat-card-content> -->
+    <mat-form-field>
+      <mat-label>{{label}}</mat-label>
+      <input placeholder="" matInput [type]="type" [(ngModel)]="input1" (ngModelChange)="valueChange()" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{label}} Vérification</mat-label>
+      <input placeholder="" matInput [type]="type" [(ngModel)]="input2" (ngModelChange)="valueChange()" required>
+    </mat-form-field>
+
+<span *ngIf="(input1 || input2) && !isValid()">Les champs {{label}} ne correspondent pas.</span>
+
+  <!-- </mat-card-content>
+  <mat-card-actions *ngIf="(input1 || input2) && !isValid()">
+    Les champs {{label}} ne correspondent pas.
+  </mat-card-actions>
+</mat-card> -->

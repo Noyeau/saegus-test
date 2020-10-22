@@ -34,13 +34,21 @@ export class TaskComponent implements OnInit {
     })
   }
 
-  deleteTask() {
 
-        this.taskService.deleteTask(this.listId, this.task.id).subscribe(res => {
-          this.deleteTaskEmit.emit(true)
-        })
-   
+  deleteTask() {
+    this.dialogService.openInformation(
+      'Confirmation',
+      "Etes vous certain de vouloir supprimer lcette Tâche ?",
+      (rep) => {
+        if (rep) {
+          this.taskService.deleteTask(this.listId, this.task.id).subscribe(res => {
+            this.deleteTaskEmit.emit(true)
+          })
+        }
+      })
   }
+
+
 
   toggleFlag() {
     this.task.finish = !this.task.finish

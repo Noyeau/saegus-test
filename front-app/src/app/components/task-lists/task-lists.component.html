@@ -1,9 +1,14 @@
-<button mat-raised-button (click)="newList()">Nouvelle Liste</button>
+<button mat-button (click)="newList()" color="primary"><mat-icon style="padding-right: 10px;">playlist_add</mat-icon> Nouvelle Liste</button>
+
+
 <mat-list>
   <div mat-subheader>Mes lites</div>
   <mat-list-item *ngFor="let list of taskLists" (click)="selectList(list)">
-    <mat-icon mat-list-icon>folder</mat-icon>
+    <mat-icon mat-list-icon>library_books</mat-icon>
     <div mat-line>{{list.title}}</div>
+    <button mat-icon-button (click)="delList(list)" color="accent" aria-label="Supprimer liste">
+      <mat-icon>backspace</mat-icon>
+    </button>
   </mat-list-item>
   <mat-divider></mat-divider>
   

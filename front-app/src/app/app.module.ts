@@ -11,7 +11,7 @@ import { MaterialModule } from './material.module';
 import { MenuSidebarComponent } from './components/menu-sidebar/menu-sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './http-interceptors';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { NoConnectedComponent } from './pages/no-connected/no-connected.component';
 import { TaskListsComponent } from './components/task-lists/task-lists.component';
@@ -21,6 +21,8 @@ import { InformationDialogComponent } from './dialogs/information-dialog/informa
 import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
 import { EditListComponent } from './components/edit-list/edit-list.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { DoubleValidatorComponent } from './components/double-validator/double-validator.component';
+import { SigninComponent } from './components/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
     FormDialogComponent,
     EditListComponent,
     EditTaskComponent,
+    DoubleValidatorComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [httpInterceptorProviders],
   entryComponents:[

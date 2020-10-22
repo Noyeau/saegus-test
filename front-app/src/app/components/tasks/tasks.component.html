@@ -1,12 +1,14 @@
+<button mat-button (click)="newTask()" color="primary"><mat-icon style="padding-right: 10px;">library_add</mat-icon> Nouvelle Tâche</button>
 
-<button mat-raised-button (click)="newTask()">Nouvelle Tache</button>
+
+
 
 <mat-list>
-  <div mat-subheader>Mes tâches en cours</div>
+  <div mat-subheader ><span [matBadge]="tasksNoFinish().length"  matBadgeOverlap="false">Mes tâches à réaliser</span></div>
   <mat-list-item *ngFor="let task of tasksNoFinish()" (click)="selectTask(task)">
-    <mat-icon mat-list-icon>folder</mat-icon>
+    <mat-icon mat-list-icon>collections_bookmark</mat-icon>
     <div mat-line>
-     {{task.shortDescription}} 
+      {{task.shortDescription}}
     </div>
     <div mat-line>{{task.echeanceDate|date}}</div>
     <button mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="accent">
@@ -14,21 +16,29 @@
     </button>
   </mat-list-item>
   <mat-divider></mat-divider>
-  
+
 </mat-list>
 
 <mat-list>
-  <div mat-subheader>Mes tâches terminées</div>
-  <mat-list-item *ngFor="let task of tasksFinish()" (click)="selectTask(task)">
-    <mat-icon mat-list-icon>folder</mat-icon>
-    <div mat-line>
-     {{task.shortDescription}} 
-    </div>
-    <div mat-line>{{task.echeanceDate|date}}</div>
-    <button mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="primary">
-      <mat-icon>flag</mat-icon>
-    </button>
-  </mat-list-item>
+  <div style="cursor: pointer;" mat-subheader (click)="displayFinished=!displayFinished">
+    <span  [matBadge]="tasksFinish().length"  matBadgeOverlap="false" matBadgeColor="accent">
+      {{displayFinished?'Masquer' : 'Afficher'}} mes tâches
+      terminées
+    </span>
+</div>
+
+  <ng-container *ngIf="displayFinished">
+    <mat-list-item *ngFor="let task of tasksFinish()" (click)="selectTask(task)">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <div mat-line>
+        {{task.shortDescription}}
+      </div>
+      <div mat-line>{{task.echeanceDate|date}}</div>
+      <button mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="primary">
+        <mat-icon>flag</mat-icon>
+      </button>
+    </mat-list-item>
+  </ng-container>
   <mat-divider></mat-divider>
-  
+
 </mat-list>

@@ -44,14 +44,12 @@ export class AuthService {
             observer.next()
           }
         }, err => {
-          this.signOut()
+          this.logOut()
           observer.next()
         })
       }
       observer.next()
     })
-
-
   }
 
   getUser() {
@@ -77,6 +75,12 @@ export class AuthService {
     return this.http.get(this.apiUrl + '/users')
   }
 
+  signIn(user){
+    return this.http.post(this.apiUrl + '/auth/signin', user).pipe(map((res: any) => {
+     console.log(res)
+    }))
+  }
+
 
   private _setConnected(user) {
     if (this._authStatus$.value.state !== 'connected') {
@@ -85,7 +89,7 @@ export class AuthService {
     }
   }
 
-  signOut() {
+  logOut() {
     sessionStorage.removeItem('jwtToken')
     this._authStatus$.next({ user: null, state: 'anonyme', isConnected: false })
   }
@@ -93,5 +97,14 @@ export class AuthService {
   getAuthStatus() {
     return this._authStatus$
   }
+
+
+  isConnected() {
+    return this._authStatus$
+      .pipe(
+        map((auth) => auth.state === 'connected')
+      )
+  }
+
 
 }

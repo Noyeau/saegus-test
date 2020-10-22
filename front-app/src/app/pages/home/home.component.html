@@ -5,20 +5,31 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span>{{title}}</span>
+      <span class="spacer"></span>
+
+      <button mat-button (click)="logOut()" color="accent" aria-label="logOut">
+        Déconnexion
+      </button>
     </mat-toolbar>
   </header>
 
 
-  <app-menu-sidebar [openLeft]="leftMenuOpen" [openRight]="this.selectedTask?true:false" >
+  <app-menu-sidebar [openLeft]="leftMenuOpen" [openRight]="selectedTask?true:false" >
 
     <ng-container left>
 
-      <app-task-lists [taskLists]="taskLists" (listSelected)="selectList($event)"></app-task-lists>
+      <app-task-lists  [taskLists]="taskLists" (listSelected)="selectList($event)"></app-task-lists>
     </ng-container >
 
-    <ng-container page *ngIf="selectedList">
+    <ng-container page >
+    <ng-container page *ngIf="selectedList; else noList" >
 
-      <app-tasks [listId]="selectedList.id" [tasks]="tasks" (taskSelected)="selectTask($event)"></app-tasks>
+     <app-tasks [listId]="selectedList.id" [tasks]="tasks" (taskSelected)="selectTask($event)"></app-tasks>
+    </ng-container>
+
+    <ng-template #noList>
+      Veuillez sélectionner une liste
+    </ng-template>
 
     </ng-container>
 

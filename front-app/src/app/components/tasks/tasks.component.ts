@@ -9,6 +9,9 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class TasksComponent implements OnInit {
 
+
+  displayFinished=false;
+
   @Output() taskSelected: EventEmitter<any> = new EventEmitter()
 
   @Input() tasks = []

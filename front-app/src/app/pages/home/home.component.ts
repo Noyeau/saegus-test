@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/services/task.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
 
 
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -64,7 +66,9 @@ export class HomeComponent implements OnInit {
 
 
 
-
+  logOut(){
+    this.authService.logOut()
+  }
 
 
 }
