@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class FormDialogComponent implements OnInit {
 
-  public form:FormGroup=null
+  public form:FormGroup
 
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,

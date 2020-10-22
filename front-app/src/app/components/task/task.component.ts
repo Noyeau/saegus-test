@@ -42,5 +42,11 @@ export class TaskComponent implements OnInit {
    
   }
 
+  toggleFlag() {
+    this.task.finish = !this.task.finish
+    this.taskService.updateTask(this.listId, this.task).subscribe(res => {
+      Object.assign(this.task, res)
+    })
+  }
 
 }

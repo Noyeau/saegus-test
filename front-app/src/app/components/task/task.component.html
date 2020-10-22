@@ -1,10 +1,15 @@
+ <h2>Détails :</h2>
+
 <mat-card class="example-card" color="dark">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{task.shortDescription}}</mat-card-title>
-    <mat-card-subtitle>{{task.echeanceDate|date}}</mat-card-subtitle>
+    <mat-card-subtitle>Créé le : {{task.createdAt|date}}</mat-card-subtitle>
+    <button mat-icon-button aria-label="termine" (click)="toggleFlag()" [color]="task.finish ? 'primary':'accent'">
+      <mat-icon>{{task.finish ? "flag":"outlined_flag"}}</mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-content>
+    <p>{{task.echeanceDate|date}}</p>
     <p>
       {{task.longDescription}}
     </p>
