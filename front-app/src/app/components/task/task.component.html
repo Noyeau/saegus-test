@@ -1,3 +1,16 @@
-<pre>
-  {{task|json}}
-  </pre>
+<mat-card class="example-card" color="dark">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{task.shortDescription}}</mat-card-title>
+    <mat-card-subtitle>{{task.echeanceDate|date}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{task.longDescription}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="editTask()">Editer</button>
+    <button mat-button (click)="deleteTask()">Supprimer</button>
+  </mat-card-actions>
+</mat-card>

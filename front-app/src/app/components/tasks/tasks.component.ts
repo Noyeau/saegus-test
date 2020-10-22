@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { TaskService } from 'src/app/services/task.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-tasks',
@@ -8,41 +9,58 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TasksComponent implements OnInit {
 
-@Output() taskSelected:EventEmitter<any>= new EventEmitter()
+  @Output() taskSelected: EventEmitter<any> = new EventEmitter()
 
+  @Input() tasks = []
 
+  @Input()  listId
+ 
 
-  private _listId
-  @Input() set listId(value) {
-    this._listId = value
-    if(value){
-      this.getTasks(value)
-    }
-  }
-
-  get listId() {
-    return this._listId
-  }
-
-
-  public tasks=[]
+  
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
   }
 
 
-  getTasks(id){
-    this.taskService.getTasks(id).subscribe(res=>{
-      console.log(res)
-      this.tasks=res
+  tasksFinish(){
+    return this.tasks.filter(x=>x.finish)
+  }
+
+  tasksNoFinish(){
+    return this.tasks.filter(x=>!x.finish)
+  }
+
+  selectTask(task) {
+    this.taskSelected.emit(task)
+  }
+
+  newTask() {
+    this.dialogService.openForm('task',null, (task) => {
+      if (task) {
+        console.log(task)
+        this.taskService.newTask(this.listId, task).subscribe(res => {
+          console.log(res)
+          this.tasks.push(res)
+        })
+      }
     })
   }
 
-  selectTask(task){
-    this.taskSelected.emit(task)
+
+  updateTask(task) {
+    this.taskService.updateTask(this.listId, task).subscribe(res => {
+      console.log(res)
+      task=res
+    })
+  }
+
+  toggleFlag(task) {
+    task.finish = !task.finish
+    this.updateTask(task)
   }
 
 }

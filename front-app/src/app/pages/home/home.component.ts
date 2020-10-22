@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/services/task.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,12 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class HomeComponent implements OnInit {
   public title = 'Saegus Taches Test';
-  public leftMenuOpen=true;
+  public leftMenuOpen = true;
+  public tasks = [];
 
-
-  public taskLists=[]
-  public selectedList=null
-  public selectedTask=null
+  public taskLists = [];
+  public selectedList = null;
+  public selectedTask = null;
 
 
   constructor(
@@ -21,26 +22,49 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.taskService.getLists().subscribe(res=>{
-      this.taskLists=res
+    this.taskService.getLists().subscribe(res => {
+      this.taskLists = res
+    })
+
+  }
+
+  getTasks() {
+    this.taskService.getTasks(this.selectedList.id).subscribe(res => {
+
+      this.tasks = res
+
     })
   }
 
-  toogleSideBar(ref:string){
-    if(ref == 'left'){
-      this.leftMenuOpen= ! this.leftMenuOpen
+
+
+
+  toogleSideBar(ref: string) {
+    if (ref == 'left') {
+      this.leftMenuOpen = !this.leftMenuOpen
     }
   }
 
 
-  selectList(list){
-    this.selectedList=list
-    this.selectedTask=null
+  selectList(list) {
+    this.selectedList = list
+    this.selectedTask = null
+    this.getTasks()
   }
 
-  selectTask(task){
+  selectTask(task) {
     console.log(task)
-    this.selectedTask=task
+    this.selectedTask = task
   }
+
+  deleteTask() {
+    this.tasks = this.tasks.filter(x => x.id !== this.selectedTask.id)
+    this.selectedTask = null
+  }
+
+
+
+
+
 
 }

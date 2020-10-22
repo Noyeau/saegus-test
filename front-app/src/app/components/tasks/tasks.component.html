@@ -1,8 +1,33 @@
+
+<button mat-raised-button (click)="newTask()">Nouvelle Tache</button>
+
 <mat-list>
-  <div mat-subheader>Mes Taches</div>
-  <mat-list-item *ngFor="let task of tasks" (click)="selectTask(task)">
+  <div mat-subheader>Mes tâches en cours</div>
+  <mat-list-item *ngFor="let task of tasksNoFinish()" (click)="selectTask(task)">
     <mat-icon mat-list-icon>folder</mat-icon>
-    <div mat-line>{{task|json}}</div>
+    <div mat-line>
+     {{task.shortDescription}} 
+    </div>
+    <div mat-line>{{task.echeanceDate|date}}</div>
+    <button mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="accent">
+      <mat-icon>outlined_flag</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  
+</mat-list>
+
+<mat-list>
+  <div mat-subheader>Mes tâches terminées</div>
+  <mat-list-item *ngFor="let task of tasksFinish()" (click)="selectTask(task)">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>
+     {{task.shortDescription}} 
+    </div>
+    <div mat-line>{{task.echeanceDate|date}}</div>
+    <button mat-icon-button aria-label="termine" (click)="toggleFlag(task)" color="primary">
+      <mat-icon>flag</mat-icon>
+    </button>
   </mat-list-item>
   <mat-divider></mat-divider>
   

@@ -9,18 +9,21 @@
   </header>
 
 
-  <app-menu-sidebar [title]="title" [openLeft]="leftMenuOpen" [openRight]="this.selectedTask?true:false" >
+  <app-menu-sidebar [openLeft]="leftMenuOpen" [openRight]="this.selectedTask?true:false" >
 
     <ng-container left>
+
       <app-task-lists [taskLists]="taskLists" (listSelected)="selectList($event)"></app-task-lists>
     </ng-container >
 
-    <ng-container page>
-      <app-tasks *ngIf="selectedList" [listId]="selectedList.id" (taskSelected)="selectTask($event)"></app-tasks>
+    <ng-container page *ngIf="selectedList">
+
+      <app-tasks [listId]="selectedList.id" [tasks]="tasks" (taskSelected)="selectTask($event)"></app-tasks>
+
     </ng-container>
 
     <ng-container right>
-      <app-task [task]="selectedTask" ></app-task>
+      <app-task *ngIf="selectedTask" [task]="selectedTask" [listId]="selectedList.id" (deleteTaskEmit)="deleteTask()" ></app-task>
     </ng-container >
 
   </app-menu-sidebar>

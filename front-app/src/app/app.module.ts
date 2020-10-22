@@ -17,6 +17,10 @@ import { NoConnectedComponent } from './pages/no-connected/no-connected.componen
 import { TaskListsComponent } from './components/task-lists/task-lists.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskComponent } from './components/task/task.component';
+import { InformationDialogComponent } from './dialogs/information-dialog/information-dialog.component';
+import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
+import { EditListComponent } from './components/edit-list/edit-list.component';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { TaskComponent } from './components/task/task.component';
     NoConnectedComponent,
     TaskListsComponent,
     TasksComponent,
-    TaskComponent
+    TaskComponent,
+    InformationDialogComponent,
+    FormDialogComponent,
+    EditListComponent,
+    EditTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +48,10 @@ import { TaskComponent } from './components/task/task.component';
     ReactiveFormsModule
   ],
   providers: [httpInterceptorProviders],
+  entryComponents:[
+    InformationDialogComponent,
+    FormDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
