@@ -4,13 +4,18 @@ const Task = require('../entities/task')
 
 /**
  * @swagger
- * /lists/:listId/tasks:
+ * /lists/{listId}/tasks:
  *   get:
  *     tags:
  *       - Task
- *     description: retourne toutes les listes de l'user
+ *     description: retourne toutes les tache de la liste
+ *     parameters:
+ *       - in: path
+ *         name: listId
+ *       - in: path
+ *         name: id
  *     security:
- *       - jwt:[]
+ *       - JWT: []
  *     consumes:
  *       - application/json
  *     produces:
@@ -43,6 +48,35 @@ router.get('/', async (req, res) => {
 
 
 //get One Task
+ /**
+ * @swagger
+ * /lists/{listId}/tasks/{id}:
+ *   get:
+ *     tags:
+ *       - Task
+ *     description: Récupération d'un tache
+ *     parameters:
+ *       - in: path
+ *         name: listId
+ *       - in: path
+ *         name: id
+ *     security:
+ *       - JWT: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *      200:
+ *        description: 'user'
+ *      400:
+ *        description: 'missing argument'
+ *      403:
+ *        description: 'no-user'
+ *      500:
+ *        description: 'error server'
+ *
+ */
 router.get('/:id', async (req, res) => {
     if (!req.jwt) {
         res.status(401).send({ msg: "Merci de vous authentifier" })
@@ -64,6 +98,36 @@ router.get('/:id', async (req, res) => {
 
 
 //New Task
+ /**
+ * @swagger
+ * /lists/{listId}/tasks:
+ *   post:
+ *     tags:
+ *       - Task
+ *     description: Création d'une Tache
+ *     parameters:
+ *       - in: path
+ *         name: listId
+ *       - in: body
+ *         name: task
+ *         description: tache a créer
+ *     security:
+ *       - JWT: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *      200:
+ *        description: 'user'
+ *      400:
+ *        description: 'missing argument'
+ *      403:
+ *        description: 'no-user'
+ *      500:
+ *        description: 'error server'
+ *
+ */
 router.post('/', async (req, res) => {
     if (!req.jwt) {
         res.status(401).send({ msg: "Merci de vous authentifier" })
@@ -89,6 +153,38 @@ router.post('/', async (req, res) => {
 
 
 //Update Task
+ /**
+ * @swagger
+ * /lists/{listId}/tasks/{id}:
+ *   post:
+ *     tags:
+ *       - Task
+ *     description: mise à jour d'une tache existante
+ *     parameters:
+ *       - in: path
+ *         name: listId
+ *       - in: path
+ *         name: id
+ *       - in: body
+ *         name: task
+ *         description: tache a modifier
+ *     security:
+ *       - JWT: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *      200:
+ *        description: 'user'
+ *      400:
+ *        description: 'missing argument'
+ *      403:
+ *        description: 'no-user'
+ *      500:
+ *        description: 'error server'
+ *
+ */
 router.post('/:id', async (req, res) => {
     if (!req.jwt) {
         res.status(401).send({ msg: "Merci de vous authentifier" })
@@ -112,6 +208,35 @@ router.post('/:id', async (req, res) => {
 
 
 //Delete Task
+/**
+ * @swagger
+ * /lists/{listId}/tasks/{id}:
+ *   delete:
+ *     tags:
+ *       - Task
+ *     description: suppression d'une tache
+ *     parameters:
+ *       - in: path
+ *         name: listId
+ *       - in: path
+ *         name: id
+ *     security:
+ *       - JWT: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *      200:
+ *        description: 'user'
+ *      400:
+ *        description: 'missing argument'
+ *      403:
+ *        description: 'no-user'
+ *      500:
+ *        description: 'error server'
+ *
+ */
 router.delete('/:id', async (req, res) => {
     if (!req.jwt) {
         res.status(401).send({ msg: "Merci de vous authentifier" })

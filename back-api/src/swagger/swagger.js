@@ -9,8 +9,9 @@ module.exports = (root) => {
             host: 'localhost:3000',
             basePath: '/',
             securityDefinitions:{
-                jwt: {
+                JWT: {
                     type: 'apiKey',
+                    description: 'JWT authorization of an API',
                     in: 'header',
                     name: 'Authorization'
                 }

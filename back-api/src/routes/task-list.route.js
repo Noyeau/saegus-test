@@ -10,10 +10,10 @@ const Task = require('../entities/task')
  * /lists:
  *   get:
  *     tags:
- *       - lists
+ *       - List
  *     description: retourne toutes les listes de l'user
  *     security:
- *       - jwt:[]
+ *       - JWT: []
  *     consumes:
  *       - application/json
  *     produces:
@@ -41,6 +41,34 @@ router.get('/', async (req, res) => {
 
 
 //New List
+/**
+ * @swagger
+ * /lists:
+ *   post:
+ *     tags:
+ *       - List
+ *     description: ajouter une liste
+ *     parameters:
+ *       - in: body
+ *         name: taskList
+ *         description: liste
+ *     security:
+ *       - JWT: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *      200:
+ *        description: 'user'
+ *      400:
+ *        description: 'missing argument'
+ *      403:
+ *        description: 'no-user'
+ *      500:
+ *        description: 'error server'
+ *
+ */
 router.post('/', async (req, res) => {
     if(!req.jwt){
         res.status(401).send({ msg: "Merci de vous authentifier"})
@@ -60,6 +88,33 @@ router.post('/', async (req, res) => {
 
 
 //get One List
+/**
+ * @swagger
+ * /lists/{id}:
+ *   get:
+ *     tags:
+ *       - List
+ *     description: retourne une liste
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *     security:
+ *       - JWT: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *      200:
+ *        description: 'user'
+ *      400:
+ *        description: 'missing argument'
+ *      403:
+ *        description: 'no-user'
+ *      500:
+ *        description: 'error server'
+ *
+ */
 router.get('/:id', async (req, res) => {
       if(!req.jwt){
           res.status(401).send({ msg: "Merci de vous authentifier"})
@@ -81,6 +136,36 @@ router.get('/:id', async (req, res) => {
 
 
 //Update List
+/**
+ * @swagger
+ * /lists/{id}:
+ *   post:
+ *     tags:
+ *       - List
+ *     description: modification d'une liste
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *       - in: body
+ *         name: taskList
+ *         description: liste a modifier
+ *     security:
+ *       - JWT: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *      200:
+ *        description: 'user'
+ *      400:
+ *        description: 'missing argument'
+ *      403:
+ *        description: 'no-user'
+ *      500:
+ *        description: 'error server'
+ *
+ */
 router.post('/:id', async (req, res) => {
     if(!req.jwt){
         res.status(401).send({ msg: "Merci de vous authentifier"})
@@ -104,6 +189,33 @@ router.post('/:id', async (req, res) => {
 
 
 //Delete List
+/**
+ * @swagger
+ * /lists/{id}:
+ *   delete:
+ *     tags:
+ *       - List
+ *     description: suppression d'une liste
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *     security:
+ *       - JWT: []
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     responses:
+ *      200:
+ *        description: 'user'
+ *      400:
+ *        description: 'missing argument'
+ *      403:
+ *        description: 'no-user'
+ *      500:
+ *        description: 'error server'
+ *
+ */
 router.delete('/:id', async (req, res) => {
     if(!req.jwt){
         res.status(401).send({ msg: "Merci de vous authentifier"})

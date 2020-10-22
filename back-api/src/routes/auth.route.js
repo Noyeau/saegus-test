@@ -8,9 +8,10 @@ const authService = require("../services/auth");
  *   post:
  *     tags:
  *       - Auth
- *     description: Give UserInfo 
- *     security:
- *       - jwt:[]
+ *     description: Connection
+ *     parameters:
+ *       - in: body
+ *         name: logInInfos
  *     consumes:
  *       - application/json
  *     produces:
@@ -34,7 +35,7 @@ router.post('/login', async (req, res) => {
 
 
     authService.logIn(req.body).then(user => {
-      
+
         res.status(200).send(user)
     }, err => {
         res.status(400).send({ msg: 'Error', err })
@@ -48,9 +49,10 @@ router.post('/login', async (req, res) => {
  *   post:
  *     tags:
  *       - Auth
- *     description: Give UserInfo 
- *     security:
- *       - jwt:[]
+ *     description: Création d'un nouvel utilisateur
+ *     parameters:
+ *       - in: body
+ *         name: userInfos
  *     consumes:
  *       - application/json
  *     produces:
@@ -71,9 +73,7 @@ router.post('/signin', async (req, res) => {
     if (!userTmp) {
         res.status(400).send({ msg: 'données manquantes' })
     }
-
     authService.createAccount(req.body).then(user => {
- 
         res.status(200).send(user)
     }, err => {
         res.status(400).send({ msg: 'Error', err })

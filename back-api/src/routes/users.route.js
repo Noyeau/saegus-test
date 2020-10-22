@@ -6,10 +6,10 @@ const userService = require("../services/user");
  * /users:
  *   get:
  *     tags:
- *       - Users
+ *       - User
  *     description: Retourne les infos de l'user connecté
  *     security:
- *       - jwt:[]
+ *       - JWT: []
  *     consumes:
  *       - application/json
  *     produces:
