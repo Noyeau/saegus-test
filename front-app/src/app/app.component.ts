@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'front-app';
+
+  public appReady: boolean = false
+
+  constructor(
+    private authService: AuthService
+  ) {
+    this.authService.initApp().subscribe(() => {
+      this.appReady = true
+    })
+  }
 }

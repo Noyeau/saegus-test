@@ -1,0 +1,9 @@
+<mat-list>
+  <div mat-subheader>Mes lites</div>
+  <mat-list-item *ngFor="let list of taskLists" (click)="selectList(list)">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>{{list.title}}</div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  
+</mat-list>

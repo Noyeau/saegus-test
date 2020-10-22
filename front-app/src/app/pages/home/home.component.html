@@ -1,0 +1,28 @@
+<div id="wrapper">
+  <header>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="toogleSideBar('left')"  aria-label="menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{title}}</span>
+    </mat-toolbar>
+  </header>
+
+
+  <app-menu-sidebar [title]="title" [openLeft]="leftMenuOpen" [openRight]="this.selectedTask?true:false" >
+
+    <ng-container left>
+      <app-task-lists [taskLists]="taskLists" (listSelected)="selectList($event)"></app-task-lists>
+    </ng-container >
+
+    <ng-container page>
+      <app-tasks *ngIf="selectedList" [listId]="selectedList.id" (taskSelected)="selectTask($event)"></app-tasks>
+    </ng-container>
+
+    <ng-container right>
+      <app-task [task]="selectedTask" ></app-task>
+    </ng-container >
+
+  </app-menu-sidebar>
+  <footer>sdf</footer>
+</div>
