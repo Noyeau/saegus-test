@@ -6,10 +6,15 @@ const environment = require('./environment')
 
 
 
-const sequelize = new Sequelize('saegus', 'root', "", {
-    host: environment.database.host,
-    dialect: environment.database.dialect
-});
+const sequelize = new Sequelize(
+    environment.database.database,
+    environment.database.user,
+    environment.database.password,
+    {
+        host: environment.database.host,
+        dialect: environment.database.dialect
+    }
+);
 
 function init() {
     //Initialisation de la BDD
@@ -40,7 +45,7 @@ function init() {
             TaskList.sync().then(function () {
                 console.log("TaskList Sync BDD")
             });
-        }, err=>{
+        }, err => {
             reject(err)
         })
     })
