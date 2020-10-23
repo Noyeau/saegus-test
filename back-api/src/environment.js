@@ -1,7 +1,7 @@
 module.exports={
     cors:[ 'http://localhost:4200', "*"],
     database:{
-        host: 'localhost',
+        host: 'http://192.168.1.112',
         dialect: 'mysql'
     }
 }
