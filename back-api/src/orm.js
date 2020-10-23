@@ -1,7 +1,14 @@
 const Sequelize = require('sequelize');
+
+
+const environment = require('./environment')
+
+
+
+
 const sequelize = new Sequelize('saegus', 'root', "", {
-    host: 'localhost',
-    dialect: 'mysql'
+    host: environment.database.host,
+    dialect: environment.database.dialect
 });
 
 function init() {

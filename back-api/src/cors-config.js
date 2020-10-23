@@ -1,4 +1,6 @@
-const whiteList = [ 'http://localhost:4200', "*"];
+const environment = require('./environment')
+
+const whiteList = environment.cors;
  const corsOptions = {
   origin:  (origin, callback) => {
     if(origin === undefined ){
